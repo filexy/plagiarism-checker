@@ -8,6 +8,11 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.template import loader
 from django.http import HttpResponse
 from django import template
+from .forms import *
+from .models import *
+from django.core.paginator import Paginator
+from django.shortcuts import render
+from datetime import datetime
 
 @login_required(login_url="/login/")
 def index(request):
@@ -17,6 +22,31 @@ def index(request):
 
     html_template = loader.get_template( 'index.html' )
     return HttpResponse(html_template.render(context, request))
+
+def file_uploader_view(request):
+
+    msg = None
+    if request.method == "POST":
+        form = UploadFileForm(request.POST,request.FILES)
+        if form.is_valid():   
+            form.save()
+            msg = 'User created.' 
+            return redirect("/documents/repository/")
+
+        else:
+            msg = 'Form is not valid' 
+    else:
+        form =UploadFileForm()
+
+    return render(request, "uploader.html", {"form": form, "msg" : msg  })
+
+def uploads_view(request):
+    uploads=Uploads.objects.all()
+    paginator = Paginator(uploads,5)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request,"uploads.html",{'page_obj': page_obj})
 
 @login_required(login_url="/login/")
 def pages(request):

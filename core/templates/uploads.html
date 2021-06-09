@@ -1,0 +1,158 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Tables {% endblock title %}
+
+{% block content %}
+<div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" 
+         style="min-height: 200px; background-image: url(/static/assets/img/theme/profile-cover.jpg); background-size: cover; background-position: center top;">
+      <!-- Mask -->
+      <span class="mask bg-gradient-default opacity-8"></span>
+      <!-- Header container -->
+      <div class="container-fluid d-flex align-items-center">
+        <div class="row">
+          <div class="col-lg-7 col-md-10">
+            <h5 class="display-2 text-white">Document&nbsp;Repository</h5>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+
+<div class="container-fluid mt--7">
+
+    <!-- Table -->
+    <div class="row">
+      <div class="col">
+        <div class="card shadow">
+          <div class="card-header border-0">
+            <h3 class="mb-0">Project Documentation Repository</h3>
+          </div>
+          <div class="table-responsive">
+            <table class="table align-items-center table-flush">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col">Project Name</th>
+                  <th scope="col">Type</th>
+                  <th scope="col">Year Submitted</th>
+                  <th scope="col">Authors</th>
+                  <th scope="col">View Document</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for uploads in page_obj %}
+                <tr>
+                  <th scope="row">
+                    <div class="media align-items-center">
+                      
+                      <div class="media-body">
+                        <span class="mb-0 text-sm">{{uploads.title}}</span>
+                      </div>
+                    </div>
+                  </th>
+                  <td>
+                    {{uploads.type}}
+                  </td>
+                  <td>
+                    <span class="badge badge-dot mr-4">
+                      <i class="bg-warning"></i> {{uploads.year}}
+                    </span>
+                  </td>
+                  <td>
+                    <div class="avatar-group">
+                      <a href="#" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="{{uploads.authors}}">
+                        <img alt="Image placeholder" src="/static/assets/img/theme/team-1-800x800.jpg" class="rounded-circle">
+                      </a>
+                    </div>
+                  </td>
+                  <td>
+                    
+                       
+                          <a href="media/{{uploads.file}}" class="avatar avatar-md bg-red" data-toggle="tooltip" data-original-title="Click To View"><i class="ni ni-paper-diploma text-white"></i> </a>
+                       
+                      </div>
+                    </div>
+                  </td>
+                  <td class="text-center">
+                    <div class="dropdown">
+                      <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-ellipsis-v"></i>
+                      </a>
+                      <div class="dropdown-menu dropdown-menu-center dropdown-menu-arrow">
+                        <a class="dropdown-item" href="#">Edit</a>
+                        <a class="dropdown-item" href="#">Delete</a>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                {% endfor %}
+             
+              </tbody>
+            </table>
+          </div>
+          <div class="card-footer py-4">
+            <nav aria-label="...">
+              <ul class="pagination justify-content-end mb-0">
+                <li class="page-item">
+                  {% if page_obj.has_previous %}
+                  <a class="page-link" href="?page=1" tabindex="-1">
+                    <i class="fas fa-angle-left"></i><i class="fas fa-angle-left"></i>
+                    <span class="sr-only">First</span>
+                  </a>
+                  <li class="page-item">
+                  <a class="page-link" href="?page={{ page_obj.previous_page_number }}" tabindex="-1">
+                    <i class="fas fa-angle-left"></i>
+                    <span class="sr-only">Previous</span>
+                  </a>
+                  </li>
+                  {% else %}
+                  <li class="page-item">
+                  <a class="page-link disabled" href="#" tabindex="-1">
+                    <i class="fas fa-angle-left"></i>
+                    <span class="sr-only">Previous</span>
+                  </a>
+                  </li>
+                  {% endif %}
+                </li>
+                &nbsp;&nbsp;
+                <li class="page-item"> Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</li> &nbsp;&nbsp;
+
+                {% if page_obj.has_next %}
+                <li class="page-item">
+                  <a class="page-link" href="?page={{ page_obj.next_page_number }}">
+                    <i class="fas fa-angle-right"></i>
+                    <span class="sr-only">Next</span>
+                  </a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">
+                    <i class="fas fa-angle-right"></i><i class="fas fa-angle-right"></i>
+                    <span class="sr-only">Last</span>
+                  </a>
+                </li>
+                {% else %}
+                <li class="page-item">
+                <a class="page-link disabled" href="#" tabindex="-1">
+                  <i class="fas fa-angle-right"></i>
+                  <span class="sr-only">Next</span>
+                </a>
+                </li>
+                
+                {% endif %}
+                
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+   
+
+
+    {% include "includes/footer.html" %}
+
+  </div>
+  {% endblock content %}
+
+<!-- Specific JS goes HERE --> 
+{% block javascripts %}{% endblock javascripts %}

@@ -8,3 +8,13 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
+class Uploads(models.Model):
+    title = models.TextField(blank=True, null=True)
+    file = models.FileField(upload_to='documents/')
+    authors = models.TextField(blank=True, null=True)
+    year = models.TextField(blank=True, null=True)
+    type = models.TextField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'uploads'

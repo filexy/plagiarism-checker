@@ -72,8 +72,13 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME'  : 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME'  : 'plagiarism',
+        'USER':'root',
+        'PASSWORD':'',
+        'HOST':'127.0.0.1',
+        'PORT':'3306',
+        'OPTIONS':{'init_command':"SET sql_mode='STRICT_TRANS_TABLES'"}
     }
 }
 
@@ -121,5 +126,8 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(CORE_DIR, 'core/static'),
 )
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 #############################################################
 #############################################################
