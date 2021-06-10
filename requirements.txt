@@ -10,4 +10,4 @@ python-decouple
 gunicorn
 whitenoise
 pysimilar
-sqlclient
+mysqlclient
