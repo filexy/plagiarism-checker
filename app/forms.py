@@ -7,9 +7,10 @@ class UploadFileForm(forms.ModelForm):
             attrs={
                 "placeholder" : "Title",                
                 "class": "form-control form-control-alternative",
+                "required":"false",
                
             }
-        ))
+        ),required=False)
     authors = forms.CharField(
         widget=forms.TextInput(
             attrs={
@@ -18,7 +19,7 @@ class UploadFileForm(forms.ModelForm):
               
                 
             }
-        ))
+        ),required=False)
     year = forms.CharField(
         widget=forms.TextInput(
             attrs={
@@ -26,7 +27,7 @@ class UploadFileForm(forms.ModelForm):
                 "class": "form-control form-control-alternative",
            
             }
-        ))
+        ),required=False)
     
     type = forms.CharField(
         widget=forms.TextInput(
@@ -34,7 +35,7 @@ class UploadFileForm(forms.ModelForm):
                 "placeholder" : "Project Type",                
                 "class": "form-control form-control-alternative",
             }
-        ))
+        ),required=False)
     class Meta:
         model = Uploads
         fields = ('title','authors','year','type','file')

@@ -17,6 +17,7 @@ urlpatterns = [
   
     path('files/add/', file_uploader_view, name="uploader"),
     path('documents/repository/', uploads_view, name="uploads"),
+    path('plagiarism/checker/', checker_view, name="checker"),
     re_path(r'^.*\.*', views.pages, name='pages'),
 
 ]

@@ -14,6 +14,7 @@ from django.core.paginator import Paginator
 from django.shortcuts import render
 from datetime import datetime
 
+
 @login_required(login_url="/login/")
 def index(request):
     
@@ -39,6 +40,24 @@ def file_uploader_view(request):
         form =UploadFileForm()
 
     return render(request, "uploader.html", {"form": form, "msg" : msg  })
+
+def checker_view(request):
+
+    msg = None
+    if request.method == "POST":
+        form = UploadFileForm(request.POST,request.FILES)
+        if form.is_valid():   
+            form.save()
+            msg = 'User created.' 
+            return redirect("/plagiarism/results/")
+
+        else:
+            msg = 'Form is not valid' 
+    else:
+        form =UploadFileForm()
+
+    return render(request, "checker.html", {"form": form, "msg" : msg  })
+
 
 def uploads_view(request):
     uploads=Uploads.objects.all()

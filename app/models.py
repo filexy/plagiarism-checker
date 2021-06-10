@@ -18,3 +18,9 @@ class Uploads(models.Model):
     class Meta:
         managed = False
         db_table = 'uploads'
+class Checker(models.Model):
+    file = models.FileField(upload_to='checker/')
+
+    class Meta:
+        managed = False
+        db_table = 'checker'
