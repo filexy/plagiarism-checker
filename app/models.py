@@ -16,11 +16,11 @@ class Uploads(models.Model):
     type = models.TextField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'uploads'
 class Checker(models.Model):
     file = models.FileField(upload_to='checker/')
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'checker'

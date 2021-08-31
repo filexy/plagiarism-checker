@@ -12,6 +12,16 @@ from .forms import *
 from .models import *
 from django.core.paginator import Paginator
 from django.shortcuts import render
+
+import os
+
+
+from django.shortcuts import render, redirect, get_object_or_404
+
+# from .models import Document
+# from .forms import DocumentForm
+from .helper_functions import similarity
+
 from datetime import datetime
 
 
@@ -47,9 +57,20 @@ def checker_view(request):
     if request.method == "POST":
         form = UploadFileForm(request.POST,request.FILES)
         if form.is_valid():   
-            form.save()
-            msg = 'User created.' 
-            return redirect("/plagiarism/results/")
+            instance = form.save()
+            msg = 'User created.'
+            uploaded_file_name = instance.file.name
+            print(f'name of file = {uploaded_file_name}')
+            percentages = []
+            for file in os.listdir("core/media/documents/"):
+                filename = os.fsdecode(file)
+                if filename.endswith(".docx") and uploaded_file_name != filename:
+                    percentage = similarity(uploaded_file_name, filename)
+                    percentages.append(percentage)
+            actual_percentage = round(float(sum(percentages) / len(percentages)-1))
+            print(f'Actual %age = {actual_percentage}')
+            return render(request,'result.html',{'result':actual_percentage})
+            return render(request)
 
         else:
             msg = 'Form is not valid' 
