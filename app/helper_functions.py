@@ -18,7 +18,6 @@ def similarity(file_to_be_checked, file_to_check_against):
         fullText.append(para.text)
         data = '\n'.join(fullText)
 
-    # print(data)
     # document = docx2txt.process('core/media/' + file_to_be_checked)
     # with open('core/media/documents/' + file_to_check_against) as f:
     # with open(document) as f:
@@ -37,7 +36,7 @@ def similarity(file_to_be_checked, file_to_check_against):
     sims = gensim.similarities.Similarity('core/workdir/', tf_idf[corpus],
                                           num_features=len(dictionary))
 
-    doc = docx.Document('core/media/documents/' + file_to_check_against)  # Creating word reader object.
+    doc = docx.Document('core/media/documents/' + file_to_check_against)
     data2 = ""
     fullText = []
     for para in doc.paragraphs:
