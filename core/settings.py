@@ -75,7 +75,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME'  : 'plagiarism',
         'USER':'root',
-        'PASSWORD':'',
+        'PASSWORD':'rootpassword',
         'HOST':'127.0.0.1',
         'PORT':'3306',
         'OPTIONS':{'init_command':"SET sql_mode='STRICT_TRANS_TABLES'"}
@@ -129,5 +129,17 @@ STATICFILES_DIRS = (
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+try:
+    from django.contrib.messages import constants as messages
+    MESSAGE_TAGS = {
+        messages.DEBUG: 'alert-info',
+        messages.INFO: 'alert-info',
+        messages.SUCCESS: 'alert-success',
+        messages.WARNING: 'alert-warning',
+        messages.ERROR: 'alert-danger',
+    }
+except Exception as e:
+    pass
 #############################################################
 #############################################################

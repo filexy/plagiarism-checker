@@ -51,43 +51,111 @@
                   </div>
               {% endfor %}
           {% endif %}
-            <form method="POST" enctype="multipart/form-data">
-              {% csrf_token %}
-                <h6 class="heading-small text-muted mb-4">Upload Document</h6>
+            {% for message in messages %}
+                <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    {{ message | safe }}
+                </div>
+            {% endfor %}
+
+{#                        <form method="POST" enctype="multipart/form-data">#}
+{#                            {% csrf_token %}#}
+{#                        {% form as p %}#}
+{#                            <input type="submit" class="btn btn-primary form-control form-control-alternative" value="Check" />#}
+{##}
+{#                        </form>#}
+
+{#            <form method="POST" enctype="multipart/form-data">#}
+{#              {% csrf_token %}#}
+{#                {{ form }}#}
+                 <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <h6 class="heading-small text-muted mb-4">Upload Documents</h6>
                 <div class="pl-lg-4">
                   <div class="row">
-                    <div class="col-lg-12">
-                        <div id="drop-zone">
-                            Drop files here...
-                            <div id="clickHere">
-                                or click here..
-                                <input type="file" name="file" id="file" onchange="form.submit()"  />
-                            </div>
-                        </div>
-                    </div>
-                    
-                    
-                  </div>
-                  <br/> <br/> 
-                  <div class="row">
-                    <div class="col-lg-3">
+                    <div class="col-lg-4">
                       <div class="form-group">
-                    
-                                </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                      
-                                 <input type="submit" class="btn btn-primary form-control form-control-alternative" value="Check" />
-                        </div>
+                        <label class="form-control-label" for="input-username">Title:</label>
+                        {{form.title}}
                       </div>
-                    
-                    
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-username">Authors:</label>
+                        {{form.authors}}
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-username">Year Submitted:</label>
+                        {{form.year}}
+                      </div>
+                    </div>
                   </div>
-                 
+                  <div class="row">
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-username">Project Type:</label>
+                        {{form.type}}
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-username">Document:</label>
+                        <input type="file" name="file" class="form-control form-control-alternative" />
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-username">Check Plagarism</label>
+                        <input type="submit" class="btn btn-primary form-control form-control-alternative" value="Check" />
+                      </div>
+                    </div>
+
+                  </div>
+                  <br/> <br/>
+
                 </div>
-              
+
               </form>
+{#                <h6 class="heading-small text-muted mb-4">Upload Document</h6>#}
+{#                <div class="pl-lg-4">#}
+{#                  <div class="row">#}
+{#                    <div class="col-lg-12">#}
+{#                        <div id="drop-zone">#}
+{#                            Drop files here...#}
+{#                            <div id="clickHere">#}
+{#                                or click here..#}
+{#                                <input type="file" name="file" id="file"  />#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{##}
+{##}
+{#                  </div>#}
+{#                  <br/> <br/> #}
+{#                  <div class="row">#}
+{#                    <div class="col-lg-3">#}
+{#                      <div class="form-group">#}
+{##}
+{#                                </div>#}
+{#                    </div>#}
+{#                    <div class="col-lg-6">#}
+{#                        <div class="form-group">#}
+
+{#                                 <input type="submit" class="btn btn-primary form-control form-control-alternative" value="Check" />#}
+{#                        </div>#}
+{#                      </div>#}
+{##}
+{##}
+{#                  </div>#}
+{##}
+{#                </div>#}
+
+{#              </form>#}
             </div>
           </div>
         </div>
